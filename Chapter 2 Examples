@@ -1,0 +1,299 @@
+
+In [41]: a_set={1,2}
+
+In [42]: a_set.add(4)
+
+In [43]: a_set
+Out[43]: {1, 2, 4}
+
+In [44]: len(a_set)
+Out[44]: 3
+
+In [45]: a_set.add(1)
+
+In [46]: a_set
+Out[46]: {1, 2, 4}
+
+In [47]: len(a_set)
+Out[47]: 3
+
+In [48]: a_set={1,2,3}
+
+In [49]: a_set
+Out[49]: {1, 2, 3}
+
+In [50]: a_set.update({2,4,6})
+
+In [51]: a_set
+Out[51]: {1, 2, 3, 4, 6}
+
+In [52]: a_set.update({3,6,9},{1,2,3,5,8,13})
+
+In [53]: a_set
+Out[53]: {1, 2, 3, 4, 5, 6, 8, 9, 13}
+
+In [54]: a_set.update([10,20,30])
+
+In [55]: a_set
+Out[55]: {1, 2, 3, 4, 5, 6, 8, 9, 10, 13, 20, 30}
+
+In [56]: a_set={1,3,6,10,15,28,36,45}
+
+In [57]: a_set
+Out[57]: {1, 3, 6, 10, 15, 28, 36, 45}
+
+In [58]: a_set.discard(10)
+
+In [59]: a_set
+Out[59]: {1, 3, 6, 15, 28, 36, 45}
+
+In [60]: a_set.discard(10)
+
+In [61]: a_set
+Out[61]: {1, 3, 6, 15, 28, 36, 45}
+
+In [62]: a_set.remove(21)
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-62-e1324b18ad7c> in <module>()
+----> 1 a_set.remove(21)
+
+KeyError: 21
+
+In [63]: a_set={1,3,6,10,15,21,28,36,45}
+
+In [64]: a_set.pop()
+Out[64]: 1
+
+In [65]: a_set.pop()
+Out[65]: 3
+
+In [66]: a_set.pop()
+Out[66]: 36
+
+In [67]: a_set
+Out[67]: {6, 10, 15, 21, 28, 45}
+
+In [68]: a_set.clear()
+
+In [69]: a_set()
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-69-1f72cd0c8618> in <module>()
+----> 1 a_set()
+
+TypeError: 'set' object is not callable
+
+In [70]: a_set
+Out[70]: set()
+
+In [71]: a_set.pop()
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-71-e21c77f61fc4> in <module>()
+----> 1 a_set.pop()
+
+KeyError: 'pop from an empty set'
+
+In [72]: a_set={2,3,4,9,12,21,30,51,76,127,195}
+
+In [73]: 30 in a_set
+Out[73]: True
+
+In [74]: 31 in a_set
+Out[74]: False
+
+In [75]: b_set={1,2,3,4,6,8,9,12,15,17,18,21}
+
+In [76]: a_set.union(b_set)
+Out[76]: {1, 2, 3, 4, 6, 8, 9, 12, 15, 17, 18, 21, 30, 51, 76, 127, 195}
+
+In [77]: a_set.intersection(b_set)
+Out[77]: {2, 3, 4, 9, 12, 21}
+
+In [78]: a_set.difference(b_set)
+Out[78]: {30, 51, 76, 127, 195}
+
+In [79]: a_set.symmetric_difference(b_set)
+Out[79]: {1, 6, 8, 15, 17, 18, 30, 51, 76, 127, 195}
+
+In [80]: b_set.symmetric_difference(a_set)
+Out[80]: {1, 6, 8, 15, 17, 18, 30, 51, 76, 127, 195}
+
+In [81]: b_set.symmetric_difference(a_set)==a_set.symmetric_difference(b_set)
+Out[81]: True
+
+In [82]: b_set.union(a_set)==a_set.union(b_set)
+Out[82]: True
+
+In [83]: b_set.intersection(a_set)==a_set.intersection(b_set)
+Out[83]: True
+
+In [84]: b_set.difference(a_set)==a_set.difference(b_set)
+Out[84]: False
+
+In [85]: a_set={1,2,3}
+
+In [86]: b_set={1,2,3,4}
+
+In [87]: a_set.issubset(b_set)
+Out[87]: True
+
+In [88]: b_set.issubset(a_set)
+Out[88]: False
+
+In [89]: b_set.issuperset(a_set)
+Out[89]: True
+
+In [90]: a_set.add(5)
+
+In [91]: a_set.issubset(b_set)
+Out[91]: False
+
+In [92]: b_set.issuperset(a_set)
+Out[92]: False
+
+In [93]: def is_it_true(anything):
+   ....:     if anything:
+   ....:         print("yes, it's true")
+   ....:     else:
+   ....:         print("no, it's false")
+   ....:
+
+In [94]: is_it_true(set())
+no, it's false
+
+In [95]: is_it_true({'a'})
+yes, it's true
+
+In [96]: is_it_true({False})
+yes, it's true
+
+In [97]: a_dict={'server':'db.diveintopython3.org', 'database':'mysql'}
+
+In [98]: a_dict
+Out[98]: {'database': 'mysql', 'server': 'db.diveintopython3.org'}
+
+In [99]: a_dict['server']
+Out[99]: 'db.diveintopython3.org'
+
+In [100]: a_dict['database']
+Out[100]: 'mysql'
+
+In [101]: a_dict['db.diveintopython3.org']
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-101-15da1c9e76d5> in <module>()
+----> 1 a_dict['db.diveintopython3.org']
+
+KeyError: 'db.diveintopython3.org'
+
+In [102]: a_dict
+Out[102]: {'database': 'mysql', 'server': 'db.diveintopython3.org'}
+
+In [103]: a_dict['database']='blog'
+
+In [104]: a_dict
+Out[104]: {'database': 'blog', 'server': 'db.diveintopython3.org'}
+
+In [105]: a_dict['user']='mark'
+
+In [106]: a_dict
+Out[106]: {'database': 'blog', 'server': 'db.diveintopython3.org', 'user': 'mark
+'}
+
+In [107]: a_dict['user']='dora'
+
+In [108]: a_dict
+Out[108]: {'database': 'blog', 'server': 'db.diveintopython3.org', 'user': 'dora
+'}
+
+In [109]: a_dict['User']='mark'
+
+In [110]: a_dict
+Out[110]:
+{'User': 'mark',
+ 'database': 'blog',
+ 'server': 'db.diveintopython3.org',
+ 'user': 'dora'}
+
+In [111]: SUFFIXES={1000: ['KB','MB','GB','TB','PB','EB','ZB','YB'], 1024: ['KiB
+','MiN','GiB','TiB','PiB,'EiB','ZiB','YiB']}
+  File "<ipython-input-111-4f1bd3b10fce>", line 1
+    SUFFIXES={1000: ['KB','MB','GB','TB','PB','EB','ZB','YB'], 1024: ['KiB','MiN
+','GiB','TiB','PiB,'EiB','ZiB','YiB']}
+
+                      ^
+SyntaxError: invalid syntax
+
+
+In [112]: SUFFIXES= {1000: ['KB','MB','GB','TB','PB','EB','ZB','YB'], 1024:['KiB
+','MiB','GiB','TiB','PiB','EiB','ZiB','YiB']}
+
+In [113]: len(SUFFIXES)
+Out[113]: 2
+
+In [114]: 1000 in SUFFIXES
+Out[114]: True
+
+In [115]: SUFFIXES[1000]
+Out[115]: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+In [116]: SUFFIXES[1024]
+Out[116]: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+
+In [117]: SUFFIXES[1000][3]
+Out[117]: 'TB'
+
+In [118]: def is_it_true(anything):
+   .....:     if anything:
+   .....:         print("yes, it's true")
+   .....:     else:
+   .....:         print("no, it's false")
+   .....:
+
+In [119]: is_it_true({})
+no, it's false
+
+In [120]: is_it_true({'a':1})
+yes, it's true
+
+In [121]: type(None)
+Out[121]: NoneType
+
+In [122]: None==False
+Out[122]: False
+
+In [123]: None==0
+Out[123]: False
+
+In [124]: None==''
+Out[124]: False
+
+In [125]: None==None
+Out[125]: True
+
+In [126]: x=None
+
+In [127]: x==None
+Out[127]: True
+
+In [128]: y=None
+
+In [129]: x==y
+Out[129]: True
+
+In [130]: def is_it_true(anything):
+   .....:     if anything:
+   .....:         print("yes, it's true")
+   .....:     else:
+   .....:         print("no, it's false")
+   .....:
+
+In [131]: is_it_true(None)
+no, it's false
+
+In [132]: is_it_true(not None)
+yes, it's true
+
+In [133]:
