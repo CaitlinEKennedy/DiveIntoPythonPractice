@@ -1,0 +1,43 @@
+Python 2.7.8 |Anaconda 2.1.0 (32-bit)| (default, Jul  2 2014, 15:13:35) [MSC v.1
+500 32 bit (Intel)]
+Type "copyright", "credits" or "license" for more information.
+
+IPython 2.2.0 -- An enhanced Interactive Python.
+Anaconda is brought to you by Continuum Analytics.
+Please check out: http://continuum.io/thanks and https://binstar.org
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+
+In [1]: #CHAPTER 7
+
+In [2]: class Fib:
+   ...:     '''iterator that yields numbers in the Fibonacci sequence'''
+   ...:     def __init__(self,max):
+   ...:         self.max=max
+   ...:     def __iter__(self):
+   ...:         self.a=0
+   ...:         self.b=1
+   ...:         return self
+   ...:     def __next__(self):
+   ...:         fib=self.a
+   ...:         if fib>self.max:
+   ...:             raise StopIteration
+   ...:         self.a,self.b=self.b,self.a+self.b
+   ...:         return fib
+   ...:
+
+In [3]: class LazyRules:
+   ...:     rules_filename='plural6-rules.txt'
+   ...:     def __init__(self):
+   ...: 0
+  File "<ipython-input-3-875236b75aba>", line 4
+    0
+     ^
+IndentationError: expected an indented block
+
+If you want to paste code into IPython, try the %paste and %cpaste magic functio
+ns.
+
+In [4]:
