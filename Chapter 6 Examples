@@ -1,0 +1,291 @@
+Python 2.7.8 |Anaconda 2.1.0 (32-bit)| (default, Jul  2 2014, 15:13:35) [MSC v.1
+500 32 bit (Intel)]
+Type "copyright", "credits" or "license" for more information.
+
+IPython 2.2.0 -- An enhanced Interactive Python.
+Anaconda is brought to you by Continuum Analytics.
+Please check out: http://continuum.io/thanks and https://binstar.org
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+
+In [1]: #Chapter 6
+
+In [2]: import re
+
+In [3]: def plural(noun):
+   ...:     if re.search('[sxz]$', noun):
+   ...:         return re.sub('$','es',noun)
+   ...:     elif re.search('[^aeioudgkprt]h$',noun):
+   ...:         return re.sub('$','es',noun)
+   ...:     elif re.search('[^aeiou]y$',noun):
+   ...:         return re.sub('y$','ies',noun)
+   ...:     else:
+   ...:         return noun+'s'
+   ...:
+
+In [4]: import re
+
+In [5]: re.search('[abc]','Mark')
+Out[5]: <_sre.SRE_Match at 0x393ccd0>
+
+In [6]: re.sub('[abc]','o','Mark')
+Out[6]: 'Mork'
+
+In [7]: re.sub('[abc]','o','caps')
+Out[7]: 'oops'
+
+In [8]: re.search('[^aeiou]y$','vacancy')
+Out[8]: <_sre.SRE_Match at 0x393cd08>
+
+In [9]: re.search('[^aeiou]y$','boy')
+
+In [10]: re.search('[aeiou]y$','day')
+Out[10]: <_sre.SRE_Match at 0x393cf38>
+
+In [11]: re.search('[^aeiou]y$','day')
+
+In [12]: re.search('[^aeiou]y$','pita')
+
+In [13]: re.sub('y$','ies','vacancy')
+Out[13]: 'vacancies'
+
+In [14]: re.sub('y$','ies','agency')
+Out[14]: 'agencies'
+
+In [15]: re.sub('([^aeiou])y$',r'\lies','vacancy')
+Out[15]: 'vacan\\lies'
+
+In [16]: re.sub('([^aeiou])y$',r'\lies','vacancy')
+Out[16]: 'vacan\\lies'
+
+In [17]: re.sub('([^aeiou])y$',r'\1ies','vacancy')
+Out[17]: 'vacancies'
+
+In [18]: #list of functions
+
+In [19]: def match_sxz(noun):
+   ....:     return re.search('[sxz]$',noun)
+   ....: def apply_sxz(noun):
+   ....:     return re.sub('$','es',noun)
+   ....: def match_h(noun):
+   ....:     return re.search('[^aeioudgkprt]h$',noun)
+   ....: def apply_h(noun):
+   ....:     return re.sub('$','es',noun)
+   ....: def match_y(noun):
+   ....:     return re.search('[^aeiou]y$',noun)
+   ....: def apply_y(noun):
+   ....:     return re.sub('y$','ies',noun)
+   ....: def match_default(noun):
+   ....:     return True
+   ....: def apply_default(noun):
+   ....:     return noun+'s'
+   ....: rules=((match_sxz, apply_sxz),(match_h,apply_h),(match_y,apply_y),(matc
+h_default,apply_default))
+   ....: def plural(noun):
+   ....:     for matches_rule, apply_rule in rules:
+   ....:         if matches_rule(noun):
+   ....:             return apply rule(noun)
+   ....:
+  File "<ipython-input-19-8b2c91937a10>", line 21
+    return apply rule(noun)
+                    ^
+SyntaxError: invalid syntax
+
+
+In [20]: def match_sxz(noun):
+   ....:     if re.search('[sxz]$', noun):
+   ....:                  alpha=0.5, bins=[x*0.01 for x in range(100)], label=na
+   ....:
+  File "<ipython-input-20-dd873f3ad35f>", line 3
+    alpha=0.5, bins=[x*0.01 for x in range(100)], label=namesClasses[j].split(os
+.sep)[-1], normed=1)
+
+                   ^
+SyntaxError: invalid syntax
+
+
+In [21]: def match_sxz(noun):
+   ....:         return re.search('[sxz]$', noun)
+   ....: def apply_sxz(noun):
+   ....:         return re.sub('$', 'es', noun)
+   ....: def match_h(noun):
+   ....:         return re.search('[^aeioudgkprt]h$', noun)
+   ....: def apply_h(noun):
+   ....:         return re.sub('$', 'es', noun)
+   ....: def match_y(noun):
+   ....:         return re.search('[^aeiou]y$', noun)
+   ....: def apply_y(noun):
+   ....:         return re.sub('y$', 'ies', noun)
+   ....: def match_default(noun):
+   ....:         return True
+   ....: def apply_default(noun):
+   ....:         return noun + 's'
+   ....: rules = ((match_sxz, apply_sxz),
+   ....:          (match_h, apply_h),
+   ....:          (match_y, apply_y),
+   ....:          (match_default, apply_default)
+   ....:          )
+   ....: def plural(noun):
+   ....:         for matches_rule, apply_rule in rules:
+   ....:                 if matches_rule(noun):
+   ....:                         return apply_rule(noun)
+   ....:
+
+In [22]: #breakdown for understanding
+
+In [23]: def plural(noun):
+   ....:     if match_sxz(noun):
+   ....:         return apply_sxz(noun)
+   ....:     if match_h(noun):
+   ....:         return apply_h(noun)
+   ....:     if match_y(noun):
+   ....:         return apply_y(noun)
+   ....:     if match_default(noun):
+   ....:         return apply_default(noun)
+   ....:
+
+In [24]: #list of patterns
+
+In [25]: def build_match_and_apply_functions(patter,search,replace):
+   ....:     def matches_rule(word):
+   ....:         return re.search(pattern,word)
+   ....:     def apply_rule(word):
+   ....:         return re.sub(search,replace,word)
+   ....:     return (matches_rule,apply_rule)
+   ....:
+
+In [26]: #CONTINUATION: ALREADY LOADED PREVIOUS SCRIPT TO GITHUB
+
+In [27]: patterns=\
+   ....:     (
+   ....:      ('[sxz]$',          '$'.'es'),
+   ....:      ('[^aeioudgkprt]h$','$','es'),
+   ....:      ('(qu|[^aeiou])y$',   'y$','ies'),
+   ....:      ('$',                '$','s')
+   ....:     )
+  File "<ipython-input-27-67906546338c>", line 2
+    ('[sxz]$',          '$'.'es'),
+                               ^
+SyntaxError: invalid syntax
+
+
+In [28]: patterns=\
+   ....:     (
+   ....:      ('[sxz]$',          '$','es'),
+   ....:      ('[^aeioiudgkprt]h$','$','es'),
+   ....:      ('(qu|[^aeiou])y$',  'y$','ies'),
+   ....:      ('$',                '$','s')
+   ....:     )
+
+In [29]: rules=[build_match_and_apply_functions(pattern,search,replace)
+   ....:     for (pattern,search,replace) in patterns]
+
+In [30]: def plural(noun):
+   ....:     for matches_rule, apply_rule in rules:
+   ....:         if matches_rule(noun):
+   ....:             return apply_rule(noun)
+   ....:
+
+In [31]: # a file of patterns example
+
+In [32]: with open('plural4-rules.txt', encoding='utf-8') as pattern_file:
+   ....:     for line in pattern_file:
+   ....:         pattern, search, replace=line.split(None,3)
+   ....:         rules.append(build_match_and_apply_functions(pattern,search, re
+place))
+   ....:
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-32-1388f5df6cce> in <module>()
+----> 1 with open('plural4-rules.txt', encoding='utf-8') as pattern_file:
+      2     for line in pattern_file:
+      3         pattern, search, replace=line.split(None,3)
+      4         rules.append(build_match_and_apply_functions(pattern,search, rep
+lace))
+      5
+
+TypeError: 'encoding' is an invalid keyword argument for this function
+
+In [33]: def make_counter(x):
+   ....:     print('entering make_counter')
+   ....:     while True:
+   ....:         yield x
+   ....:         print('incrementing x')
+   ....:         x=x+1
+   ....:
+
+In [34]: counter=make_counter(2)
+
+In [35]: counter
+Out[35]: <generator object make_counter at 0x03BD1FA8>
+
+In [36]:
+
+In [36]: next(counter)
+entering make_counter
+Out[36]: 2
+
+In [37]: next(counter)
+incrementing x
+Out[37]: 3
+
+In [38]: nect(counter)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-38-65bbafc01807> in <module>()
+----> 1 nect(counter)
+
+NameError: name 'nect' is not defined
+
+In [39]: next(coutner)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-39-7e1dc62fcf30> in <module>()
+----> 1 next(coutner)
+
+NameError: name 'coutner' is not defined
+
+In [40]: next(counter)
+incrementing x
+Out[40]: 4
+
+In [41]: #fibonacci generator
+
+In [42]: def fib(max):
+   ....:     a,b=0,1
+   ....:     while a<max:
+   ....:         yield a
+   ....:         a,b=b,a+b
+   ....:
+
+In [43]: from fibonacci import fib
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+<ipython-input-43-bb49019a3324> in <module>()
+----> 1 from fibonacci import fib
+
+ImportError: No module named fibonacci
+
+In [44]: import re
+
+In [45]: from fibonacci import fib
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+<ipython-input-45-bb49019a3324> in <module>()
+----> 1 from fibonacci import fib
+
+ImportError: No module named fibonacci
+
+In [46]: import fibonacci.py
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+<ipython-input-46-2c441df84071> in <module>()
+----> 1 import fibonacci.py
+
+ImportError: No module named fibonacci.py
+
+In [47]: #plural rule generator example
+
+In [48]:
