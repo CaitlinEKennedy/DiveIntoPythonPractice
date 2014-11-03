@@ -1,0 +1,299 @@
+In [28]: next(gen)
+Out[28]: 69
+
+In [29]: next(gen)
+Out[29]: 68
+
+In [30]: tuple(ord(c) for c in unique_characters)
+Out[30]: (69, 68, 77, 79, 78, 83, 82, 89)
+
+In [31]: def ord_map(a_string):
+   ....:     for c in a_string:
+   ....:         yield ord(c)
+   ....:
+
+In [32]: gen=ord_map(unique_characters)
+
+In [33]: #calculating permutations
+
+In [34]: import itertools
+
+In [35]: perms=itertools.permutations([1,2,3],2)
+
+In [36]: next(perms)
+Out[36]: (1, 2)
+
+In [37]: next(perms)
+Out[37]: (1, 3)
+
+In [38]: next(perms)
+Out[38]: (2, 1)
+
+In [39]: next(perms)
+Out[39]: (2, 3)
+
+In [40]: next(perms)
+Out[40]: (3, 1)
+
+In [41]: next(perms)
+Out[41]: (3, 2)
+
+In [42]: next(perms)
+---------------------------------------------------------------------------
+StopIteration                             Traceback (most recent call last)
+<ipython-input-42-2f38aa3f83d9> in <module>()
+----> 1 next(perms)
+
+StopIteration:
+
+In [43]: perms=itertools.permutations('ABC',3)
+
+In [44]: next(perms)
+Out[44]: ('A', 'B', 'C')
+
+In [45]: next(perms)
+Out[45]: ('A', 'C', 'B')
+
+In [46]: next(perms)
+Out[46]: ('B', 'A', 'C')
+
+In [47]: next(perms)
+Out[47]: ('B', 'C', 'A')
+
+In [48]: next(perms)
+Out[48]: ('C', 'A', 'B')
+
+In [49]: next(perms)
+Out[49]: ('C', 'B', 'A')
+
+In [50]: next(perms)
+---------------------------------------------------------------------------
+StopIteration                             Traceback (most recent call last)
+<ipython-input-50-2f38aa3f83d9> in <module>()
+----> 1 next(perms)
+
+StopIteration:
+
+In [51]: list(itertools.permutations('ABC',3))
+Out[51]:
+[('A', 'B', 'C'),
+ ('A', 'C', 'B'),
+ ('B', 'A', 'C'),
+ ('B', 'C', 'A'),
+ ('C', 'A', 'B'),
+ ('C', 'B', 'A')]
+
+In [52]: #other fun stuff in itertools
+
+In [53]: list(itertools.produt('ABC','123'))
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-53-8c48e124bf77> in <module>()
+----> 1 list(itertools.produt('ABC','123'))
+
+AttributeError: 'module' object has no attribute 'produt'
+
+In [54]: list(itertools.product('ABC','123'))
+Out[54]:
+[('A', '1'),
+ ('A', '2'),
+ ('A', '3'),
+ ('B', '1'),
+ ('B', '2'),
+ ('B', '3'),
+ ('C', '1'),
+ ('C', '2'),
+ ('C', '3')]
+
+In [55]: list(itertools.combinations('ABC',2))
+Out[55]: [('A', 'B'), ('A', 'C'), ('B', 'C')]
+
+In [56]: list(range(0,3))
+Out[56]: [0, 1, 2]
+
+In [57]: list(range(10,13))
+Out[57]: [10, 11, 12]
+
+In [58]: list(itertools.chain(range(0,3),range(10,13)))
+Out[58]: [0, 1, 2, 10, 11, 12]
+
+In [59]: list(zip(range(0,3),range(10,13)))
+Out[59]: [(0, 10), (1, 11), (2, 12)]
+
+In [60]: list(zip(range(0,3),range(10,14)))
+Out[60]: [(0, 10), (1, 11), (2, 12)]
+
+In [61]: list(itertools.zip_longest(range(0,3),range(10,14)))
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-61-af02e30221a3> in <module>()
+----> 1 list(itertools.zip_longest(range(0,3),range(10,14)))
+
+AttributeError: 'module' object has no attribute 'zip_longest'
+
+In [62]: characters=('S','M','E','D','O','N','R','Y')
+
+In [63]: guess=('1','2','0','3','4','5','6','7')
+
+In [64]: tuple(zip(characters,guess))
+Out[64]:
+(('S', '1'),
+ ('M', '2'),
+ ('E', '0'),
+ ('D', '3'),
+ ('O', '4'),
+ ('N', '5'),
+ ('R', '6'),
+ ('Y', '7'))
+
+In [65]: dict(zip(characters,guess))
+Out[65]:
+{'D': '3',
+ 'E': '0',
+ 'M': '2',
+ 'N': '5',
+ 'O': '4',
+ 'R': '6',
+ 'S': '1',
+ 'Y': '7'}
+
+In [66]: # new kind of string manipulation
+
+In [67]: translation_table={ord('A'):ord('O')}
+
+In [68]: translation_table
+Out[68]: {65: 79}
+
+In [69]: 'Mark'.translate(translation_table)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-69-49e81dc7805b> in <module>()
+----> 1 'Mark'.translate(translation_table)
+
+TypeError: expected a character buffer object
+
+In [70]: #not sure why this didn't work... I wrote exactly what was in the ex
+
+In [71]: characters=tuple(ord(c) for c in 'SMEDONRY')
+
+In [72]: characters
+Out[72]: (83, 77, 69, 68, 79, 78, 82, 89)
+
+In [73]: guess=tuple(ord(c) for c in '91570682')
+
+In [74]: guess
+Out[74]: (57, 49, 53, 55, 48, 54, 56, 50)
+
+In [75]: translation_table=dict(zip(characters,guess))
+
+In [76]: translation_table
+Out[76]: {68: 55, 69: 53, 77: 49, 78: 54, 79: 48, 82: 56, 83: 57, 89: 50}
+
+In [77]: 'SEND + MORE == MONEY'.translate(translation_table)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-77-df9b1d57cf43> in <module>()
+----> 1 'SEND + MORE == MONEY'.translate(translation_table)
+
+TypeError: expected a character buffer object
+
+In [78]: #same error....
+
+In [79]: #evaluating arbitrary strings as python expressions
+
+In [80]: eval('1+1==2')
+Out[80]: True
+
+In [81]: eval('1+1==3')
+Out[81]: False
+
+In [82]: eval('9567+1085==10652')
+Out[82]: True
+
+In [83]: eval('"A"+"B"')
+Out[83]: 'AB'
+
+In [84]: eval('"MARK".translate({65:79})')
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-84-89c8299f0672> in <module>()
+----> 1 eval('"MARK".translate({65:79})')
+
+<string> in <module>()
+
+TypeError: expected a character buffer object
+
+In [85]: eval('"AAAAA".count("A")')
+Out[85]: 5
+
+In [86]: eval('["*']*5')
+  File "<ipython-input-86-ade8008d7d12>", line 1
+    eval('["*']*5')
+              ^
+SyntaxError: invalid syntax
+
+
+In [87]: eval('["*"]*5')
+Out[87]: ['*', '*', '*', '*', '*']
+
+In [88]: x=5
+
+In [89]: eval("x*5")
+Out[89]: 25
+
+In [90]: eval("pow(x,2)")
+Out[90]: 25
+
+In [91]: import math
+
+In [92]: eval("math.sqrt(x)")
+Out[92]: 2.23606797749979
+
+In [93]: #evaluating arbitrary strings as python expressions
+
+In [94]: import subprocess
+
+In [95]: eval("subprocess.getoutput('ls~')")
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-95-e2a502eaf4df> in <module>()
+----> 1 eval("subprocess.getoutput('ls~')")
+
+<string> in <module>()
+
+AttributeError: 'module' object has no attribute 'getoutput'
+
+In [96]: x=5
+
+In [97]: eval("x*5",{},{})
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-97-769f47397045> in <module>()
+----> 1 eval("x*5",{},{})
+
+<string> in <module>()
+
+NameError: name 'x' is not defined
+
+In [98]: eval("x*5",{"x":x},{})
+Out[98]: 25
+
+In [99]: import math
+
+In [100]: eval("math.sqrt(x)",{"x":x},{})
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-100-4aca3e8e5e8b> in <module>()
+----> 1 eval("math.sqrt(x)",{"x":x},{})
+
+<string> in <module>()
+
+NameError: name 'math' is not defined
+
+In [101]: eval("pow(5,2)",{},{})
+Out[101]: 25
+
+In [102]: eval("__import__('math').sqrt(5)",{},{})
+Out[102]: 2.23606797749979
+
+In [103]:
